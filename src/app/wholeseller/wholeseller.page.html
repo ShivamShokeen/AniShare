@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Wholeseller</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light" menu="leftMenu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar *ngIf="this.selectedCategory" [(ngModel)]="searchText" (ionChange)="filterRecords()"
+    placeholder="Enter name"></ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-icon color="secondary" name="list-outline"></ion-icon>
+    <ion-select (ionChange)="categorySelected(input)" interfaceOptions="customActionSheetOptions"
+      interface="action-sheet" #input placeholder="Select one">
+      <ion-select-option value="Fish">Fish</ion-select-option>
+      <ion-select-option value="Bird">Bird</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div class="ion-text-center">
+    <ion-text color="medium" *ngIf="!this.selectedCategory" style="font-size: xx-large;"> Please select a category first
+    </ion-text>
+  </div>
+
+  <div class="ion-text-center" *ngIf="animalDetails">
+    <ion-text color="medium" style="font-size: xx-large;" *ngIf="animalDetails.length ==0"> No search found there might be
+      typing mistake or the thing you are searching is not available not but it might be in future for more update mail
+      to 'sample@sample.com'
+    </ion-text>
+  </div>
+
+  <div *ngIf="this.selectedCategory">
+    <ul *ngFor="let animals of animalDetails" style="cursor: pointer;  outline: none;">
+      <li>
+        <ion-card>
+          <ion-card-content>
+            <img src="{{animals.image}}" width="350px" height="150px"><br />
+            <!-- <div class="ion-text-start"> -->
+            <ion-label>Name : </ion-label>
+            <ion-label color="success">{{animals.name}}</ion-label><br />
+            <ion-label>Address : </ion-label>
+            <ion-label color="success">{{animals.address}}</ion-label><br />
+            <ion-label>Price : </ion-label>
+            <ion-label color="success">{{animals.price}}</ion-label><br />
+            <ion-label>Colour : </ion-label>
+            <ion-label color="success">{{animals.color}}</ion-label><br />
+            <!-- <div style="width: 40%;">
+              <ion-label>Description : </ion-label>
+              <ion-label color="success">{{animals.description}}</ion-label>
+             </div> -->
+          </ion-card-content>
+        </ion-card>
+      </li>
+    </ul>
+  </div>
+</ion-content>

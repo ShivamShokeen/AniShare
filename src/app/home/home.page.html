@@ -1,0 +1,110 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Animal Share
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light" menu="leftMenu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar *ngIf="this.selectedCategory" animated showCancelButton="focus" cancelButtonText="Cancel text"
+    spellcheck="true" [(ngModel)]="userInputText" (ionChange)="searchInput($event)" placeholder="Enter name of animal">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-icon color="secondary" name="list-outline"></ion-icon>
+    <ion-select (ionChange)="categorySelected(input)" interfaceOptions="customActionSheetOptions"
+      interface="action-sheet" #input placeholder="Categories">
+      <ion-select-option *ngFor="let type of petDetails.petType">{{type.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- <div class="ion-text-center" *ngIf="!this.selectedCategory">
+    <ion-text color="medium" style="font-size: xx-large;"> Please select a category first
+    </ion-text>
+  </div> -->
+
+  <div class="ion-text-center" *ngIf="Animals">
+    <ion-text color="medium" style="font-size: xx-large;" *ngIf="Animals.length ==0"> No search found there might be
+      typing mistake or the thing you are searching is not available not but it might be in future for more update mail
+      to 'sample@sample.com'
+    </ion-text>
+  </div>
+  <!-- j -->
+  <ion-item [hidden]="hide == true">
+    <ion-icon color="secondary" name="list-outline"></ion-icon>
+    <ion-select (ionChange)="selectAnimalCategory(detail)" interfaceOptions="customActionSheetOptions"
+      interface="action-sheet" #detail placeholder="Select categories to display any 4 details on main page">
+      <ion-select-option *ngFor="let type of petDetails.petType">{{type.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-grid [hidden]="hide == false" style="padding:10px">
+    <ion-row>
+      <ion-col>
+        <ion-text class="ion-text-center" color="success">Animal name</ion-text><br /> <br />
+        <ion-text *ngFor="let animalDetails of animalDetailsToDisplay" (click)="selectedAnimalSubcategory(animal)">
+          <ion-checkbox value="{{animalDetails.name}}" #animal></ion-checkbox> &nbsp;&nbsp;
+          <ion-label color="medium">{{animalDetails.name}}</ion-label><br /><br />
+        </ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text class="ion-text-center" color="success">Animal Breed's</ion-text><br /><br />
+        <ion-text *ngFor="let animalDetails of petDetails.uniqueBreed" style="padding:10px"
+          (click)="selectedAnimalSubcategory(animal)">
+          <ion-checkbox value="{{animalDetails}}" #animal></ion-checkbox> &nbsp;&nbsp;
+          <ion-label color="medium">{{animalDetails}}</ion-label><br /><br />
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="animalDetailsList != undefined">
+    <div class="ion-text-center">
+      <ion-text color="danger">Click on the checkbox to select any 4 details</ion-text>
+    </div>
+    <br /><br />
+    <ion-card *ngFor="let animalLists of animalDetailsList">
+      <ion-card-content (click)="animalDataToDisplay(animalList)">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-checkbox value="{{animalLists.id}}" #animalList></ion-checkbox><br /><br />
+              <ion-text color="medium">Name :</ion-text>
+              <ion-text color="success">{{animalLists.name}}</ion-text><br /><br />
+              <ion-text color="medium">Breed :</ion-text>
+              <ion-text>{{animalLists.breed}}</ion-text><br /><br />
+              <ion-text color="medium">Location :</ion-text>
+              <ion-text>{{animalLists.location}}</ion-text><br /><br />
+              <ion-text color="medium">Category :</ion-text>
+              <ion-text>{{animalLists.category}}</ion-text><br /><br />
+              <ion-text color="medium">Price :</ion-text>
+              <ion-text>{{animalLists.price}}</ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <img src="{{animalLists.image}}" height="100%">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div>
+    <ul *ngFor="let animals of Animals" style="cursor: pointer; outline: none;">
+      <li>
+        <ion-card [routerLink]="['/pet-details',animals.id,animals.category]">
+          <ion-card-content>
+            <img src="{{animals.image}}" width="350px" height="150px"> <br />
+            <ion-label>Name : </ion-label>
+            <ion-label color="success">{{animals.name}}</ion-label><br />
+            <ion-label>Breed : </ion-label>
+            <ion-label color="success">{{animals.breed}}</ion-label><br />
+            <ion-label>Price : </ion-label>
+            <ion-label color="success">{{animals.price}}</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </li>
+    </ul>
+  </div>
+</ion-content>

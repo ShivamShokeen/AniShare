@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngFor="let animal of animalDetails">{{animal.name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let animal of animalDetails">
+    <ion-card-content>
+      <img src="{{animal.image}}" style="height: 368px;
+      width: -webkit-fill-available;">
+    </ion-card-content>
+  </ion-card>
+</ion-content>

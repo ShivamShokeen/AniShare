@@ -1,0 +1,47 @@
+<ion-app>
+  <ion-menu slide="start" type="push" contentId="main" menuId="leftMenu">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>
+          Home
+        </ion-title>
+        <ion-buttons slot="end" style="cursor: pointer;">
+          <ion-menu-toggle color="light" menu="leftMenu">
+            <ion-icon name="close" size="large"></ion-icon>
+          </ion-menu-toggle>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-menu-toggle style="cursor: pointer;">
+        <ion-list>
+          <ion-item [routerLink]="['/home']">
+            <ion-icon color="secondary" name="home-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+            <ion-label>Home</ion-label>
+          </ion-item><br>
+          <ion-item [routerLink]="['/buyer']">
+            <ion-icon color="secondary" name="cash-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+            <ion-label>Buyer</ion-label>
+          </ion-item><br>
+          <ion-item [routerLink]="['/seller']">
+            <ion-icon color="secondary" name="cash-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+            <ion-label>Seller</ion-label>
+          </ion-item><br> 
+          <ion-item [routerLink]="['/wholeseller']">
+            <ion-icon color="secondary" name="cart-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+            <ion-label>Wholeseller</ion-label>
+          </ion-item><br>          
+          <ion-item [routerLink]="['/']">
+            <ion-icon color="secondary" name="person-circle-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+            <ion-label>Sign Up</ion-label>
+          </ion-item><br>
+          <ion-item [routerLink]="['/']">
+            <ion-icon color="secondary" name="person-circle-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+            <ion-label>Sign In</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
